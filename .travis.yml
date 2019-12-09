@@ -5,4 +5,5 @@ cache:
   directories:
     - $HOME/.m2
 script:
+  - sh pipelines/configure-maven-artifactory.sh
   - mvn deploy
