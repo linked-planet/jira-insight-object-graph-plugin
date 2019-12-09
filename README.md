@@ -16,4 +16,4 @@ client code.
 
 ## API Documentation
 The Open API 3 specification of the REST API can be found in
-[doc/rest/api.yml](doc/rest/api.yml).
+[doc/rest](doc/rest).
