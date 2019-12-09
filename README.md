@@ -1,5 +1,5 @@
 # Insight Object Graph
-Provides a REST API to retrieve Insight objects as a graph data structure.
+Provides a REST API to simplify Insight object access.
 
 ## Motivation
 If you need to retrieve field data for lots of Insight objects, you
