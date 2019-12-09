@@ -11,3 +11,6 @@ script:
   - sh pipelines/configure-maven-artifactory.sh $HOME/.m2/settings.xml
   - set +e
   - mvn deploy
+    -DaltReleaseDeploymentRepository=artifactory.libs-release-local::$ARTIFACTORY_CONTEXT_URL/libs-release-local
+    -DaltSnapshotDeploymentRepository=artifactory.libs-snapshot-local::$ARTIFACTORY_CONTEXT_URL/libs-snapshot-local
+    -Pci
