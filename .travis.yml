@@ -10,6 +10,4 @@ script:
   - set -e
   - sh pipelines/configure-maven-artifactory.sh $HOME/.m2/settings.xml
   - set +e
-  # Print contents of /usr/share/maven/conf/settings.xml for debug purposes
-  - cat $HOME/.m2/settings.xml
   - mvn deploy
