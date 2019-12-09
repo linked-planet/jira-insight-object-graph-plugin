@@ -8,6 +8,6 @@ cache:
 
 script:
   - set -e
-  - sh pipelines/configure-maven-artifactory.sh
+  - sh pipelines/configure-maven-artifactory.sh $HOME/.m2/settings.xml
   - set +e
   - mvn deploy

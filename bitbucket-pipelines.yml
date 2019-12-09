@@ -6,7 +6,7 @@ steps:
       caches:
         - maven
       script:
-        - sh pipelines/configure-maven-artifactory.sh
+        - sh pipelines/configure-maven-artifactory.sh /usr/share/maven/conf/settings.xml
         # Print contents of /usr/share/maven/conf/settings.xml for debug purposes
         - cat /usr/share/maven/conf/settings.xml
         - mvn clean deploy
@@ -49,7 +49,7 @@ pipelines:
           caches:
             - maven
           script:
-            - sh pipelines/configure-maven-artifactory.sh
+            - sh pipelines/configure-maven-artifactory.sh /usr/share/maven/conf/settings.xml
             - sh pipelines/release.sh $BITBUCKET_GIT_HTTP_ORIGIN
           artifacts:
             # pass release version number to downstream deployment steps
