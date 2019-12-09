@@ -1,4 +1,4 @@
-# Insight Object Graph
+# Jira Insight Object Graph Plugin
 [![Build Status](https://travis-ci.com/link-time/jira-insight-object-graph-plugin.svg?branch=master)](https://travis-ci.com/link-time/jira-insight-object-graph-plugin)
 [![GitHub License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
