@@ -72,15 +72,15 @@ paths:
                    "attributes":
                      [{
                         "name": "Key",
-                        "values": ["ISMHPC-1"]
+                        "values": ["IT-1"]
                       },
                       {
                         "name": "Name",
-                        "values": ["Mondsee"]
+                        "values": ["SomeName"]
                       },
                       {
                         "name": "AttributeXY",
-                        "values": ["ValueXY"]
+                        "values": ["SomeAttributeValue"]
                       }]
                  }]
         '404':
