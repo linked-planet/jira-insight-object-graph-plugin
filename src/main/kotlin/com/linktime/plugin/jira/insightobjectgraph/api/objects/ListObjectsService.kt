@@ -37,6 +37,13 @@ interface ListObjectsService {
                    resolveAttributes: Set<String>,
                    resolveRelations: Boolean): InsightObjectListRootNode?
 
+    fun getObjectsWithIql(objectTypeName: String,
+                          schemaId: Int?,
+                          attributes: Set<String>,
+                          resolveAttributes: Set<String>,
+                          resolveRelations: Boolean,
+                          iqlString: String): InsightObjectListRootNode?
+
     data class InsightObjectListRootNode(val objects: List<InsightObjectNode>)
 
     data class InsightObjectNode(val id: Int, val attributes: List<InsightObjectAttributeNode>)
