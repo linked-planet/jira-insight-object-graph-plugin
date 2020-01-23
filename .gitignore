@@ -29,3 +29,12 @@ buildNumber.properties
 # App-specific
 # ----------------------------------
 *.tar.gz
+
+# ----------------------------------
+# Eclipse
+# ----------------------------------
+.classpath
+.factorypath
+.project
+.settings/
+

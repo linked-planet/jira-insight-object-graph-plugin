@@ -30,12 +30,12 @@ interface ListObjectsService {
 
     data class FieldNode(val name: String, val values: List<String>)
 
-
     fun getObjects(objectTypeName: String,
-                   schemaId: Int?,
-                   attributes: Set<String>,
-                   resolveAttributes: Set<String>,
-                   resolveRelations: Boolean): InsightObjectListRootNode?
+                          schemaId: Int?,
+                          attributes: Set<String>,
+                          resolveAttributes: Set<String>,
+                          resolveRelations: Boolean,
+                          iqlString: String?): InsightObjectListRootNode?
 
     data class InsightObjectListRootNode(val objects: List<InsightObjectNode>)
 

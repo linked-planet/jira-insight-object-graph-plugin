@@ -89,11 +89,15 @@ constructor(private val insightApiFacade: InsightApiFacade,
     }
 
     override fun getObjects(objectTypeName: String,
-                            schemaId: Int?,
-                            attributes: Set<String>,
-                            resolveAttributes: Set<String>,
-                            resolveRelations: Boolean): ListObjectsService.InsightObjectListRootNode? {
-        val iql = "objectType in objectTypeAndChildren(\"$objectTypeName\")"
+                                   schemaId: Int?,
+                                   attributes: Set<String>,
+                                   resolveAttributes: Set<String>,
+                                   resolveRelations: Boolean,
+                                   iqlString: String?): ListObjectsService.InsightObjectListRootNode? {
+        val iql = "objectType in objectTypeAndChildren(\"$objectTypeName\")" +
+                if (iqlString != null) {
+                    " and $iqlString"
+                } else ""
         val iqlResult = when (schemaId) {
             null -> insightApiFacade.findObjectsByIQL(iql)
             else -> insightApiFacade.findObjectsByIQLAndSchema(schemaId, iql)
