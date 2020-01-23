@@ -66,6 +66,7 @@ paths:
           description: 'Optionally pass additional iql query to be applied.
                         if your query consists of multiple statements, wrap them in parenthesis as it will be
                         concatenated with another query'
+          required: false
           schema:
             type: string
       responses:

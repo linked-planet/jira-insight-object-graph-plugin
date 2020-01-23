@@ -89,35 +89,14 @@ constructor(private val insightApiFacade: InsightApiFacade,
     }
 
     override fun getObjects(objectTypeName: String,
-                            schemaId: Int?,
-                            attributes: Set<String>,
-                            resolveAttributes: Set<String>,
-                            resolveRelations: Boolean): ListObjectsService.InsightObjectListRootNode? {
-        val iql = "objectType in objectTypeAndChildren(\"$objectTypeName\")"
-        val iqlResult = when (schemaId) {
-            null -> insightApiFacade.findObjectsByIQL(iql)
-            else -> insightApiFacade.findObjectsByIQLAndSchema(schemaId, iql)
-        }
-        return iqlResult
-                .map { objectBean ->
-                    val objectAttributes = getObjectAttributes(objectBean, resolveAttributes, resolveRelations) {
-                        (attributes.isEmpty() && resolveAttributes.isEmpty()) ||
-                                attributes.contains(it.name) || resolveAttributes.contains(it.name)
-                    }
-                    ListObjectsService.InsightObjectNode(objectBean.id, objectAttributes)
-                }
-                .let { ListObjectsService.InsightObjectListRootNode(it) }
-    }
-
-    override fun getObjectsWithIql(objectTypeName: String,
                                    schemaId: Int?,
                                    attributes: Set<String>,
                                    resolveAttributes: Set<String>,
                                    resolveRelations: Boolean,
-                                   iqlString: String): ListObjectsService.InsightObjectListRootNode? {
+                                   iqlString: String?): ListObjectsService.InsightObjectListRootNode? {
         val iql = "objectType in objectTypeAndChildren(\"$objectTypeName\")" +
-                if (iqlString.isNotEmpty()) {
-                    " and " + iqlString
+                if (iqlString != null) {
+                    " and $iqlString"
                 } else ""
         val iqlResult = when (schemaId) {
             null -> insightApiFacade.findObjectsByIQL(iql)

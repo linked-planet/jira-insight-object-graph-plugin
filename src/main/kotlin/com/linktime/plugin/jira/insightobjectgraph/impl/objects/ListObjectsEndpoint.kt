@@ -41,10 +41,9 @@ constructor(private val listService: ListObjectsService) {
                        @QueryParam("attributes") attributes: Set<String>,
                        @QueryParam("resolve_attributes") resolveAttributes: Set<String>,
                        @QueryParam("resolve_relations") resolveRelations: Boolean,
-                       @QueryParam("iql_string") iqlString: String): Response {
+                       @QueryParam("iql_string") iqlString: String?): Response {
 
-        val siteObjects = if (iqlString.isEmpty()) listService.getObjects(objectTypeName, schemaId, attributes, resolveAttributes, resolveRelations)
-            else listService.getObjectsWithIql(objectTypeName, schemaId, attributes, resolveAttributes, resolveRelations, iqlString)
+        val siteObjects = listService.getObjects(objectTypeName, schemaId, attributes, resolveAttributes, resolveRelations, iqlString)
         return if (siteObjects == null)
             Response.status(HttpStatus.SC_NOT_FOUND).build()
         else
