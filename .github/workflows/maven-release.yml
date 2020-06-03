@@ -38,6 +38,8 @@ jobs:
 
       - shell: bash
         env:
+          ARTIFACTORY_USERNAME: ${{ secrets.LINK_TIME_ARTIFACTORY_USERNAME }}
+          ARTIFACTORY_PASSWORD: ${{ secrets.LINK_TIME_ARTIFACTORY_PASSWORD }}
           LINK_TIME_ARTIFACTORY_USERNAME: ${{ secrets.LINK_TIME_ARTIFACTORY_USERNAME }}
           LINK_TIME_ARTIFACTORY_PASSWORD: ${{ secrets.LINK_TIME_ARTIFACTORY_PASSWORD }}
         run: |
