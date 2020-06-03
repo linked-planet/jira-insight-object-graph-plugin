@@ -45,8 +45,8 @@
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
 
-        <jira.version>8.1.0</jira.version>
-        <insight.version>8.2.1</insight.version>
+        <jira.version>8.5.3</jira.version>
+        <insight.version>8.4.4</insight.version>
 
         <amps.version>8.0.2</amps.version>
 
@@ -439,7 +439,7 @@
         <repository>
             <id>central</id>
             <name>Maven Central</name>
-            <url>http://repo1.maven.org/maven2</url>
+            <url>https://repo1.maven.org/maven2</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -451,7 +451,7 @@
         <repository>
             <id>spring-plugins</id>
             <name>Spring Plugins repository</name>
-            <url>http://repo.spring.io/plugins-release</url>
+            <url>https://repo.spring.io/plugins-release</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -459,6 +459,10 @@
                 <enabled>true</enabled>
                 <checksumPolicy>warn</checksumPolicy>
             </releases>
+        </repository>
+        <repository>
+            <id>riada-repository</id>
+            <url>https://repo.riada.io/repository/riada-repo/</url>
         </repository>
     </repositories>
 
@@ -478,7 +482,7 @@
         <pluginRepository>
             <id>central</id>
             <name>Maven Central</name>
-            <url>http://repo1.maven.org/maven2</url>
+            <url>https://repo1.maven.org/maven2</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>

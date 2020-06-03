@@ -100,12 +100,12 @@ constructor(private val insightApiFacade: InsightApiFacade) : ObjectGraphService
             } else if (objectTypeAttribute.isObjectReference) {
                 log.debug("Object attribute is object reference -> add to both relations and attributes $logContext")
                 val objects = objectAttributeBean.objectAttributeValueBeans.map { it.referencedObjectBeanId }
-                relations += DirectRelationNode(objectAttributeBean.id, objectTypeAttribute.id, objectTypeAttribute.name, objects)
-                attributes += ValueAttributeNode(objectAttributeBean.id, objectTypeAttribute.id, objectTypeAttribute.name, objects.map { it.toString() })
+                relations += DirectRelationNode(objectAttributeBean.id.toInt(), objectTypeAttribute.id, objectTypeAttribute.name, objects)
+                attributes += ValueAttributeNode(objectAttributeBean.id.toInt(), objectTypeAttribute.id, objectTypeAttribute.name, objects.map { it.toString() })
             } else {
                 log.debug("Object attribute is NO object reference -> only add to attributes $logContext")
                 val values = objectAttributeBean.objectAttributeValueBeans.map { it.value.toString() }
-                attributes += ValueAttributeNode(objectAttributeBean.id, objectTypeAttribute.id, objectTypeAttribute.name, values)
+                attributes += ValueAttributeNode(objectAttributeBean.id.toInt(), objectTypeAttribute.id, objectTypeAttribute.name, values)
             }
         }
 
