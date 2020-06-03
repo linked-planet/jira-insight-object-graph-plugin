@@ -41,6 +41,7 @@ jobs:
           LINK_TIME_ARTIFACTORY_USERNAME: ${{ secrets.LINK_TIME_ARTIFACTORY_USERNAME }}
           LINK_TIME_ARTIFACTORY_PASSWORD: ${{ secrets.LINK_TIME_ARTIFACTORY_PASSWORD }}
         run: |
+          echo -e "<settings>\n</settings>" > $HOME/.m2/settings.xml
           pipelines/configure-maven-artifactory.sh $HOME/.m2/settings.xml
 
       - name: Publish to artifactory
