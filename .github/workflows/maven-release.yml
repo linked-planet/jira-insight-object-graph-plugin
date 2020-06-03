@@ -36,11 +36,12 @@ jobs:
       - name: Build with maven
         run: mvn -B package --file pom.xml
 
-      - name: Prepare Maven settings-file
-        run: sh pipelines/configure-maven-artifactory.sh $HOME/.m2/settings.xml
+      - shell: bash
+        env:
+          LINK_TIME_ARTIFACTORY_USERNAME: ${{ secrets.LINK_TIME_ARTIFACTORY_USERNAME }}
+          LINK_TIME_ARTIFACTORY_PASSWORD: ${{ secrets.LINK_TIME_ARTIFACTORY_PASSWORD }}
+        run: |
+          pipelines/configure-maven-artifactory.sh $HOME/.m2/settings.xml
 
       - name: Publish to artifactory
-        run: mvn deploy -q
-          -DaltReleaseDeploymentRepository=artifactory.libs-release-local::$ARTIFACTORY_CONTEXT_URL/libs-release-local
-          -DaltSnapshotDeploymentRepository=artifactory.libs-snapshot-local::$ARTIFACTORY_CONTEXT_URL/libs-snapshot-local
-          -Pci
+        run: mvn deploy -q -Pci
