@@ -31,13 +31,9 @@ jobs:
         uses: s4u/maven-settings-action@v2.1.0
         with:
           servers: '[
-          {"id": "artifactory.release", "username": "${ARTIFACTORY_USERNAME}", "password": "${ARTIFACTORY_PASSWORD}"},
-          {"id": "artifactory.snapshot", "username": "${ARTIFACTORY_USERNAME}", "password": "${ARTIFACTORY_PASSWORD}"}
+          {"id": "artifactory.release", "username": "${env.ARTIFACTORY_USERNAME}", "password": "${env.ARTIFACTORY_PASSWORD}"},
+          {"id": "artifactory.snapshot", "username": "${env.ARTIFACTORY_USERNAME}", "password": "${env.ARTIFACTORY_PASSWORD}"}
           ]'
-
-      - shell: bash
-        run: |
-          cat ~/.m2/settings.xml
 
       - name: Build & Publish to Artifactory
         run: mvn -B deploy -Pci
