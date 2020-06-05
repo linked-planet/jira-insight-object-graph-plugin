@@ -7,7 +7,7 @@ package com.linktime.plugin.jira.insightobjectgraph.impl;
  * #%L
  * insight-object-graph
  * %%
- * Copyright (C) 2018 - 2019 The Plugin Authors
+ * Copyright (C) 2018 - 2020 The Plugin Authors
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
