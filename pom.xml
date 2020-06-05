@@ -24,7 +24,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.linktime.plugin.jira</groupId>
+    <groupId>com.linked-planet.plugin.jira</groupId>
     <artifactId>insight-object-graph</artifactId>
     <version>3.5.2-SNAPSHOT</version>
 
@@ -258,7 +258,7 @@
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
                         <Export-Package>
-                            com.linktime.plugin.jira.insightobjectgraph,
+                            com.linkedplanet.plugin.jira.insightobjectgraph,
                         </Export-Package>
                         <Import-Package>
                             *
