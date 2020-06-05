@@ -31,12 +31,15 @@ jobs:
         uses: s4u/maven-settings-action@v2.1.0
         with:
           servers: '[
-          {"id": "artifactory.release", "username": "${{ secrets.ARTIFACTORY_USERNAME }}", "password": "${{ secrets.ARTIFACTORY_PASSWORD }}"},
-          {"id": "artifactory.snapshot", "username": "${{ secrets.ARTIFACTORY_USERNAME }}", "password": "${{ secrets.ARTIFACTORY_PASSWORD }}"}
+          {"id": "artifactory.release", "username": "ARTIFACTORY_USERNAME", "password": "ARTIFACTORY_PASSWORD"},
+          {"id": "artifactory.snapshot", "username": "ARTIFACTORY_USERNAME", "password": "ARTIFACTORY_PASSWORD"}
           ]'
 
       - name: Build & Publish to Artifactory
         run: mvn -B deploy -Pci
+        env:
+          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
 
   # ---------------------------------------------------------------------------
   # TODO
