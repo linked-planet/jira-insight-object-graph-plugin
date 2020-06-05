@@ -25,8 +25,8 @@
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}"/>
-        <param name="vendor-logo">images/link-time-vendor-logo.png</param>
-        <param name="plugin-icon">images/link-time-plugin-logo.png</param>
+        <param name="vendor-logo">images/linked-planet-vendor-logo.png</param>
+        <param name="plugin-icon">images/linked-planet-plugin-logo.png</param>
     </plugin-info>
 
     <resource type="i18n" name="i18n" location="i18n/plugin"/>
