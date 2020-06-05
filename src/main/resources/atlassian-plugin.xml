@@ -34,7 +34,7 @@
     <!-- ################################################################## -->
     <!-- REST ENDPOINTS -->
     <!-- ################################################################## -->
-    <rest key="com.linkedplanet.plugin.jira.insight-object-graph.endpoint" path="/insight-object-graph" version="1.0">
+    <rest key="com.linked-planet.plugin.jira.insight-object-graph.endpoint" path="/insight-object-graph" version="1.0">
         <description>Insight Object Graph API</description>
     </rest>
 
