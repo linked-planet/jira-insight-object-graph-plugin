@@ -29,8 +29,8 @@
     <version>3.5.2-SNAPSHOT</version>
 
     <organization>
-        <name>link-time GmbH</name>
-        <url>https://link-time.com/</url>
+        <name>linked-planet GmbH</name>
+        <url>https://linked-planet.com/</url>
     </organization>
 
     <name>Insight Object Graph for Jira</name>
