@@ -33,8 +33,8 @@
         <url>https://link-time.com/</url>
     </organization>
 
-    <name>Insight Object Graph</name>
-    <description>Provides a REST API to retrieve Insight data as object graph</description>
+    <name>Insight Object Graph for Jira</name>
+    <description>Provides a REST API to simplify Mindville Insight object access.</description>
     <packaging>atlassian-plugin</packaging>
 
     <inceptionYear>2018</inceptionYear>
