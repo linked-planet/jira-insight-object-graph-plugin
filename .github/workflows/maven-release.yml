@@ -1,5 +1,4 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+# https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
 name: Maven Release
 
@@ -27,40 +26,16 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+          server-id: artifactory
+          server-username: ${{ secrets.ARTIFACTORY_USERNAME }}
+          server-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
 
-      - name: Build with Maven
-        run: mvn -B package
+      - name: Build & Publish to Artifactory
+        run: mvn -B deploy
+          -DaltReleaseDeploymentRepository=artifactory::${{ secrets.ARTIFACTORY_CONTEXT_URL }}/libs-release-local
+          -DaltSnapshotDeploymentRepository=artifactory::${{ secrets.ARTIFACTORY_CONTEXT_URL }}/libs-snapshot-local
+          -Pci
 
   # ---------------------------------------------------------------------------
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-          server-id: github
-          settings-path: ${{ github.workspace }}
-
-      - shell: bash
-        env:
-          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
-        run: |
-          touch ~/.m2/settings.xml
-          echo -e "<settings>\n</settings>" > ~/.m2/settings.xml
-          pipelines/configure-maven-artifactory.sh ~/.m2/settings.xml
-
-      - name: Publish to Artifactory
-        run: mvn -B deploy
-          -DaltReleaseDeploymentRepository=artifactory.libs-release-local::${{ secrets.ARTIFACTORY_CONTEXT_URL }}/libs-release-local
-          -DaltSnapshotDeploymentRepository=artifactory.libs-snapshot-local::${{ secrets.ARTIFACTORY_CONTEXT_URL }}/libs-snapshot-local
-          -Pci
+  # TODO
+  # release:
