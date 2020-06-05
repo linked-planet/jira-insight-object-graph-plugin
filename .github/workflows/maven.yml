@@ -13,6 +13,8 @@ jobs:
   # ---------------------------------------------------------------------------
   build-and-publish:
     runs-on: ubuntu-latest
+    if: "! contains(toJSON(github.event.commits.*.message), '[skip ci]')"
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -46,7 +48,3 @@ jobs:
         env:
           ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
           ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
-
-  # ---------------------------------------------------------------------------
-  # TODO
-  # release:
