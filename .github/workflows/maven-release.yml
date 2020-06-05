@@ -10,22 +10,27 @@ on:
     branches: [ master ]
 
 jobs:
+
+  # ---------------------------------------------------------------------------
   build:
     runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-  release:
-    runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Build with Maven
+        run: mvn -B package
+
+  # ---------------------------------------------------------------------------
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
@@ -33,21 +38,16 @@ jobs:
           server-id: github
           settings-path: ${{ github.workspace }}
 
-      - name: Build with maven
-        run: mvn -B package --file pom.xml
-
       - shell: bash
         env:
-          ARTIFACTORY_USERNAME: ${{ secrets.LINK_TIME_ARTIFACTORY_USERNAME }}
-          ARTIFACTORY_PASSWORD: ${{ secrets.LINK_TIME_ARTIFACTORY_PASSWORD }}
-          LINK_TIME_ARTIFACTORY_USERNAME: ${{ secrets.LINK_TIME_ARTIFACTORY_USERNAME }}
-          LINK_TIME_ARTIFACTORY_PASSWORD: ${{ secrets.LINK_TIME_ARTIFACTORY_PASSWORD }}
+          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
         run: |
           echo -e "<settings>\n</settings>" > $HOME/.m2/settings.xml
           pipelines/configure-maven-artifactory.sh $HOME/.m2/settings.xml
 
-      - name: Publish to artifactory
-        run: mvn deploy 
+      - name: Publish to Artifactory
+        run: mvn -B deploy
           -DaltReleaseDeploymentRepository=artifactory.libs-release-local::${{ secrets.ARTIFACTORY_CONTEXT_URL }}/libs-release-local
           -DaltSnapshotDeploymentRepository=artifactory.libs-snapshot-local::${{ secrets.ARTIFACTORY_CONTEXT_URL }}/libs-snapshot-local
           -Pci

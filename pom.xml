@@ -62,6 +62,11 @@
         <!-- @formatter:off -->
         <developer.connection>scm:git:https://github.com/link-time/jira-insight-object-graph-plugin.git</developer.connection>
         <!-- @formatter:on -->
+
+        <!-- Deployment properties intended to be set via command line -->
+        <deploy.url>_</deploy.url>
+        <deploy.username>_</deploy.username>
+        <deploy.password>_</deploy.password>
     </properties>
 
 
@@ -414,17 +419,6 @@
 
 
     <repositories>
-        <repository>
-            <id>link-time.artifactory</id>
-            <url>https://artifactory.link-time.org/artifactory/libs-local</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-                <checksumPolicy>warn</checksumPolicy>
-            </releases>
-        </repository>
         <repository>
             <id>atlassian-public</id>
             <url>https://maven.atlassian.com/repository/public</url>
