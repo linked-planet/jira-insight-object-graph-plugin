@@ -12,8 +12,8 @@ jobs:
 
   # ---------------------------------------------------------------------------
   build-and-publish:
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
 
     steps:
       - uses: actions/checkout@v2
