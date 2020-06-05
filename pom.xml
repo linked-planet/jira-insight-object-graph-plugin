@@ -502,7 +502,7 @@
             <url>https://artifactory.link-time.org/artifactory/libs-release-local</url>
         </repository>
         <snapshotRepository>
-            <id>artifactory.snapshopt</id>
+            <id>artifactory.snapshot</id>
             <name>Artifactory Snapshot</name>
             <url>https://artifactory.link-time.org/artifactory/libs-snapshot-local</url>
         </snapshotRepository>
