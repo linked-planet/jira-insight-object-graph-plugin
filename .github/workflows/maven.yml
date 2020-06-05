@@ -40,7 +40,8 @@ jobs:
           cat ~/.m2/settings.xml
 
       - name: Build & Publish to Artifactory
-        run: mvn -B deploy -Pci
+#        run: mvn -B deploy -Pci
+        run: mvn help:effective-settings
         env:
           ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
           ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
