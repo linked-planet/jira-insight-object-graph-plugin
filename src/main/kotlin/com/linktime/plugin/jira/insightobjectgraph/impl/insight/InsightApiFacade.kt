@@ -46,10 +46,10 @@ constructor(@field:ComponentImport private val objectFacade: ObjectFacade,
             objectFacade.loadObjectBean(id)
 
     fun loadObjectType(id: Int): ObjectTypeBean? =
-            objectTypeFacade.loadObjectTypeBean(id)
+            objectTypeFacade.loadObjectType(id)
 
     fun loadObjectTypeAttribute(id: Int): ObjectTypeAttributeBean? =
-            objectTypeAttributeFacade.loadObjectTypeAttributeBean(id)
+            objectTypeAttributeFacade.loadObjectTypeAttribute(id)
 
     fun findObjectsByIQL(iql: String): List<ObjectBean> =
             iqlFacade.findObjects(iql)
