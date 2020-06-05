@@ -16,6 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
@@ -30,6 +36,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
@@ -43,8 +55,8 @@ jobs:
           ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
           ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
         run: |
-          echo -e "<settings>\n</settings>" > $HOME/.m2/settings.xml
-          pipelines/configure-maven-artifactory.sh $HOME/.m2/settings.xml
+          echo -e "<settings>\n</settings>" > ~/.m2/settings.xml
+          pipelines/configure-maven-artifactory.sh ~/.m2/settings.xml
 
       - name: Publish to Artifactory
         run: mvn -B deploy
