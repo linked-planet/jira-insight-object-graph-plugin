@@ -495,4 +495,18 @@
     </scm>
 
 
+    <distributionManagement>
+        <repository>
+            <id>artifactory.release</id>
+            <name>Artifactory Release</name>
+            <url>https://artifactory.link-time.org/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>artifactory.snapshopt</id>
+            <name>Artifactory Snapshot</name>
+            <url>https://artifactory.link-time.org/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
 </project>
