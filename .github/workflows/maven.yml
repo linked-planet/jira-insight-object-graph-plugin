@@ -35,13 +35,14 @@ jobs:
           {"id": "artifactory.snapshot", "username": "${env.ARTIFACTORY_USERNAME}", "password": "${env.ARTIFACTORY_PASSWORD}"}
           ]'
 
-      - shell: bash
-        run: |
-          cat ~/.m2/settings.xml
+      - name: Debug Maven Settings
+        run: mvn help:effective-settings
+        env:
+          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
 
       - name: Build & Publish to Artifactory
-#        run: mvn -B deploy -Pci
-        run: mvn help:effective-settings
+        run: mvn -B deploy -Pci
         env:
           ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
           ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
