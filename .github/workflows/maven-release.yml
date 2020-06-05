@@ -55,6 +55,7 @@ jobs:
           ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
           ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
         run: |
+          touch ~/.m2/settings.xml
           echo -e "<settings>\n</settings>" > ~/.m2/settings.xml
           pipelines/configure-maven-artifactory.sh ~/.m2/settings.xml
 
