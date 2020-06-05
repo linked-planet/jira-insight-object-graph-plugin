@@ -28,7 +28,7 @@ jobs:
           java-version: 1.8
 
       - name: Setup Maven
-      - uses: s4u/maven-settings-action@v2.1.0
+        uses: s4u/maven-settings-action@v2.1.0
         with:
           servers: '[
           {"id": "artifactory.release", "username": "${{ secrets.ARTIFACTORY_USERNAME }}", "password": "${{ secrets.ARTIFACTORY_PASSWORD }}"},
