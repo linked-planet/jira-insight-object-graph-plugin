@@ -35,6 +35,10 @@ jobs:
           {"id": "artifactory.snapshot", "username": "${ARTIFACTORY_USERNAME}", "password": "${ARTIFACTORY_PASSWORD}"}
           ]'
 
+      - shell: bash
+        run: |
+          cat ~/.m2/settings.xml
+
       - name: Build & Publish to Artifactory
         run: mvn -B deploy -Pci
         env:
