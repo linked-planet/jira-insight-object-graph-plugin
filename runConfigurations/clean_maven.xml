@@ -1,9 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="clean-maven" type="ShConfigurationType">
-    <option name="SCRIPT_PATH" value="$PROJECT_DIR$/script/clean-maven.sh" />
-    <option name="SCRIPT_OPTIONS" value="" />
-    <option name="INTERPRETER_PATH" value="/bin/sh" />
-    <option name="INTERPRETER_OPTIONS" value="" />
-    <method v="2" />
-  </configuration>
-</component>

@@ -167,6 +167,30 @@
                 </executions>
             </plugin>
 
+            <!-- Clean Maven directories that get corrupted when rebuilding the project with IntelliJ
+             or on successive Maven builds -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <delete failonerror="false">
+                                    <fileset dir="${project.build.directory}/dependency-maven-plugin-markers"/>
+                                    <fileset dir="${project.build.directory}/classes"/>
+                                </delete>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- KOTLIN -->
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
