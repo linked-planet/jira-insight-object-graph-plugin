@@ -4,7 +4,7 @@
   ~ #%L
   ~ insight-object-graph
   ~ %%
-  ~ Copyright (C) 2018 - 2019 The Plugin Authors
+  ~ Copyright (C) 2018 - 2020 The Plugin Authors
   ~ %%
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -24,17 +24,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.linktime.plugin.jira</groupId>
+    <groupId>com.linked-planet.plugin.jira</groupId>
     <artifactId>insight-object-graph</artifactId>
-    <version>3.5.1-SNAPSHOT</version>
+    <version>3.5.2-SNAPSHOT</version>
 
     <organization>
-        <name>link-time GmbH</name>
-        <url>https://link-time.com/</url>
+        <name>linked-planet GmbH</name>
+        <url>https://linked-planet.com/</url>
     </organization>
 
-    <name>Insight Object Graph</name>
-    <description>Provides a REST API to retrieve Insight data as object graph</description>
+    <name>Insight Object Graph for Jira</name>
+    <description>Provides a REST API to simplify Mindville Insight object access.</description>
     <packaging>atlassian-plugin</packaging>
 
     <inceptionYear>2018</inceptionYear>
@@ -45,8 +45,8 @@
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
 
-        <jira.version>8.1.0</jira.version>
-        <insight.version>8.2.1</insight.version>
+        <jira.version>8.5.3</jira.version>
+        <insight.version>8.4.4</insight.version>
 
         <amps.version>8.0.2</amps.version>
 
@@ -56,12 +56,17 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <kotlin.version>1.3.50</kotlin.version>
+        <kotlin.version>1.3.72</kotlin.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
         <!-- @formatter:off -->
         <developer.connection>scm:git:https://github.com/link-time/jira-insight-object-graph-plugin.git</developer.connection>
         <!-- @formatter:on -->
+
+        <!-- Deployment properties intended to be set via command line -->
+        <deploy.url>_</deploy.url>
+        <deploy.username>_</deploy.username>
+        <deploy.password>_</deploy.password>
     </properties>
 
 
@@ -162,6 +167,30 @@
                 </executions>
             </plugin>
 
+            <!-- Clean Maven directories that get corrupted when rebuilding the project with IntelliJ
+             or on successive Maven builds -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <delete failonerror="false">
+                                    <fileset dir="${project.build.directory}/dependency-maven-plugin-markers"/>
+                                    <fileset dir="${project.build.directory}/classes"/>
+                                </delete>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- KOTLIN -->
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -229,7 +258,7 @@
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
                         <Export-Package>
-                            com.linktime.plugin.jira.insightobjectgraph,
+                            com.linkedplanet.plugin.jira.insightobjectgraph,
                         </Export-Package>
                         <Import-Package>
                             *
@@ -415,17 +444,6 @@
 
     <repositories>
         <repository>
-            <id>link-time.artifactory</id>
-            <url>https://artifactory.link-time.org/artifactory/libs-local</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-                <checksumPolicy>warn</checksumPolicy>
-            </releases>
-        </repository>
-        <repository>
             <id>atlassian-public</id>
             <url>https://maven.atlassian.com/repository/public</url>
             <snapshots>
@@ -439,7 +457,7 @@
         <repository>
             <id>central</id>
             <name>Maven Central</name>
-            <url>http://repo1.maven.org/maven2</url>
+            <url>https://repo1.maven.org/maven2</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -451,7 +469,7 @@
         <repository>
             <id>spring-plugins</id>
             <name>Spring Plugins repository</name>
-            <url>http://repo.spring.io/plugins-release</url>
+            <url>https://repo.spring.io/plugins-release</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -459,6 +477,10 @@
                 <enabled>true</enabled>
                 <checksumPolicy>warn</checksumPolicy>
             </releases>
+        </repository>
+        <repository>
+            <id>riada-repository</id>
+            <url>https://repo.riada.io/repository/riada-repo/</url>
         </repository>
     </repositories>
 
@@ -478,7 +500,7 @@
         <pluginRepository>
             <id>central</id>
             <name>Maven Central</name>
-            <url>http://repo1.maven.org/maven2</url>
+            <url>https://repo1.maven.org/maven2</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -495,6 +517,20 @@
         <developerConnection>${developer.connection}</developerConnection>
         <tag>HEAD</tag>
     </scm>
+
+
+    <distributionManagement>
+        <repository>
+            <id>artifactory.release</id>
+            <name>Artifactory Release</name>
+            <url>https://artifactory.link-time.org/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>artifactory.snapshot</id>
+            <name>Artifactory Snapshot</name>
+            <url>https://artifactory.link-time.org/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 
 </project>

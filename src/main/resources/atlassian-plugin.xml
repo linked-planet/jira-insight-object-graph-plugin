@@ -3,7 +3,7 @@
   ~ insight-object-graph
   ~
   %%
-  Copyright (C) 2018 - 2019 The Plugin Authors
+  Copyright (C) 2018 - 2020 The Plugin Authors
   ~
   %%
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,8 +25,8 @@
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}"/>
-        <param name="vendor-logo">images/link-time-vendor-logo.png</param>
-        <param name="plugin-icon">images/link-time-plugin-logo.png</param>
+        <param name="vendor-logo">images/linked-planet-vendor-logo.png</param>
+        <param name="plugin-icon">images/linked-planet-plugin-logo.png</param>
     </plugin-info>
 
     <resource type="i18n" name="i18n" location="i18n/plugin"/>
@@ -34,7 +34,7 @@
     <!-- ################################################################## -->
     <!-- REST ENDPOINTS -->
     <!-- ################################################################## -->
-    <rest key="com.linktime.plugin.jira.insight-object-graph.endpoint" path="/insight-object-graph" version="1.0">
+    <rest key="com.linked-planet.plugin.jira.insight-object-graph.endpoint" path="/insight-object-graph" version="1.0">
         <description>Insight Object Graph API</description>
     </rest>
 
