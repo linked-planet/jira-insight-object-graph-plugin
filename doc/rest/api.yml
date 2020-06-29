@@ -1,0 +1,189 @@
+openapi: "3.0.0"
+
+
+info:
+  version: "1.0"
+  title: Insight Object Graph API
+  description: Provides a REST API to simplify Mindville Insight object access.
+
+
+servers:
+  - url: /rest/insight-object-graph/1.0
+
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+
+
+security:
+  - basicAuth: []
+
+
+paths:
+
+  /objects/{object-type-name}:
+    get:
+      summary: Returns all Insight objects of the given object type, including all attributes.
+      description: Children of the object type are considered as well.
+      parameters:
+        - in: path
+          name: object-type-name
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: schemaId
+          description: Optionally restrict results to specific Insight Object Schema
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: attributes
+          description: Optionally restrict results to specific attributes (case-sensitive)
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: resolve_attributes
+          description: Optionally restrict results to specific attributes (case-sensitive) and resolve relation ID
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: resolve_relations
+          description: Optionally resolve ALL attribute relation IDs to names of connected objects
+          schema:
+            type: boolean
+        - in: query
+          name: iql_string
+          description: 'Optionally pass additional iql query to be applied.
+                        if your query consists of multiple statements, wrap them in parenthesis as it will be
+                        concatenated with another query'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: JSON representing list of Insight Objects
+          content:
+            application/json:
+              example:
+                [{
+                   "id": 1,
+                   "attributes":
+                     [{
+                        "name": "Key",
+                        "values": ["IT-1"]
+                      },
+                      {
+                        "name": "Name",
+                        "values": ["SomeName"]
+                      },
+                      {
+                        "name": "AttributeXY",
+                        "values": ["SomeAttributeValue"]
+                      }]
+                 }]
+        '404':
+          description: No objects found
+
+
+  /graph/{insight_object_id}:
+    get:
+      summary: Returns the object graph with the given Insight object as root.
+      parameters:
+        - in: path
+          name: insight_object_id
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: blacklist_relations
+          description: Set of relation names (on any object) to exclude
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: whitelist_relations
+          description: Set of relation names (on any object) to include (exclusively)
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: JSON representing the object graph
+          content:
+            application/json:
+              example:
+                [{
+                   "id": 39328,
+                   "typeId": 32,
+                   "schemaId": 82,
+                   "attributes":
+                     [{
+                        "id": 634223,
+                        "typeId": 1535,
+                        "name": "someAttribute",
+                        "values": ["value 1", "value 2"]
+                      }],
+                   "relations":
+                     [{
+                        "id": 23423,
+                        "typeId": 1536,
+                        "name": "someRelation",
+                        "values": [832492, 23729]
+                      }],
+                   "inverseRelations":
+                     [{
+                        "name": "someInverseRelation",
+                        "objects": [2342]
+                      }]
+                 }]
+        '404':
+          description: Insight Object not found
+
+
+  /issues/{insight-object-field-name}:
+    get:
+      summary: Returns all Jira Issues with an object relation in the given {insight-object-field-name}.
+      parameters:
+        - in: path
+          name: insight-object-field-name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: JSON representing list of Jira Issues
+          content:
+            application/json:
+              example:
+                [{
+                   "id": 39328,
+                   "fields":
+                     [{
+                        "name": "Key",
+                        "values": ["TEST-1"]
+                      },
+                      {
+                        "name": "Summary",
+                        "values": ["New Issue to Site"]
+                      },
+                      {
+                        "name": "AttributeXY",
+                        "values": ["ValueXY"]
+                      }]
+                 }]
+        '404':
+          description: No issues found
