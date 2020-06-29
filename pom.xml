@@ -46,7 +46,7 @@
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
 
         <jira.version>8.5.3</jira.version>
-        <insight.version>8.4.4</insight.version>
+        <insight.version>8.6.0</insight.version>
 
         <amps.version>8.0.2</amps.version>
 
