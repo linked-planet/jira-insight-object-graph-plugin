@@ -26,7 +26,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.linked-planet.plugin.jira</groupId>
     <artifactId>insight-object-graph</artifactId>
-    <version>3.5.2-SNAPSHOT</version>
+    <version>3.5.2</version>
 
     <organization>
         <name>linked-planet GmbH</name>
