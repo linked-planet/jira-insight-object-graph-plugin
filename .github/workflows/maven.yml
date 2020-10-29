@@ -47,6 +47,8 @@ jobs:
 
       - name: Build & Publish to Artifactory
         run: mvn -B deploy -Pci
+          -DaltReleaseDeploymentRepository=artifactory.release::${env.ARTIFACTORY_CONTEXT_URL}/libs-release-local
+          -DaltSnapshotDeploymentRepository=artifactory.snapshot::${env.ARTIFACTORY_CONTEXT_URL}/libs-snapshot-local
         env:
           ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
           ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
