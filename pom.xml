@@ -60,7 +60,7 @@
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
         <!-- @formatter:off -->
-        <developer.connection>scm:git:https://github.com/link-time/jira-insight-object-graph-plugin.git</developer.connection>
+        <developer.connection>scm:git:https://github.com/linked-planet/jira-insight-object-graph-plugin.git</developer.connection>
         <!-- @formatter:on -->
 
         <!-- Deployment properties intended to be set via command line -->
