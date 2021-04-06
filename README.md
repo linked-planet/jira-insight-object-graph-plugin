@@ -14,24 +14,18 @@ application.
 ## Overview
 This plugin provides REST endpoints as explained below.
 
-### /issues
-See [doc/rest/api-issues.yml](doc/rest/api-issues.yml)
-
-Retrieve all Jira issues having related objects in a given Insight custom field.
-
-
-### /object-graph
-See [doc/rest/api-object-graph.yml](doc/rest/api-object-graph.yml)
-
-Describes an object graph (objects are linked via relations) and every object
-contains it's attribute values. Data is properly aggregated.
-
+See [doc/rest/api-1-0.yml](doc/rest/api-1-0.yml) for the Open API specification.
 
 ### /objects
-See [doc/rest/api-objects.yml](doc/rest/api-objects.yml)
-
-Retrieve all objects of a given object type, allowing to set IQL filter,
+Retrieve all objects of a given object type, set IQL filter,
 select attributes to retrieve and to resolve names of linked objects.
+
+### /object-graph
+Describes an object graph (objects are linked via relations) and every object
+contains its attribute values. Data is properly aggregated.
+
+### /issues
+Retrieve all Jira issues having related objects in a given Insight custom field.
 
 
 [insight]: https://www.mindville.com/insight-asset-management-CMDB-software-for-jira
